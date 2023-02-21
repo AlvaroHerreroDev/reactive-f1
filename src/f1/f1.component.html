@@ -1,0 +1,9 @@
+<h1 class="text-2xl text-center font-bold">Car Races? ✅</h1>
+<h1 class="text-2xl text-center font-bold">Race Conditions? ⛔</h1>
+
+<app-season-selector (updateSeason)="updateSeason($event)" [selectedSeason]="selectedSeason$ | async"
+                     class="flex gap-2 justify-center mt-5"></app-season-selector>
+
+<app-drivers></app-drivers>
+<app-races></app-races>
+<app-qualifying></app-qualifying>

@@ -1,0 +1,14 @@
+<h4 class="my-3 text-xl font-bold">Qualifying Results</h4>
+
+<ng-container *ngIf="currentQualifying$ | async as currentQualifying; else noDataTpl">
+  <div class="font-bold mb-2">{{currentQualifying.raceName}}</div>
+  <div *ngFor="let item of currentQualifying.QualifyingResults" class="flex gap-1">
+    <div class="font-bold">{{item.position}}</div>
+    <div>{{item.Driver.givenName}} {{item.Driver.familyName}}</div>
+    <div>- Position: {{item.number}}</div>
+  </div>
+</ng-container>
+
+<ng-template #noDataTpl>
+  <div class="text-gray-400">Select a Race to see the qualifying results</div>
+</ng-template>

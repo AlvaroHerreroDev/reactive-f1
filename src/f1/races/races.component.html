@@ -1,0 +1,41 @@
+<h4 class="my-3 ">
+  <span class="text-xl font-bold">Races</span>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+</h4>
+
+<div *ngFor="let race of items$ | async" class="mb-2" [class.disabled]="loading$ | async">
+  <div class="flex gap-2">
+    <a target="_blank" [href]="race.url">🦆️</a>
+    <div>{{race.raceName}}</div>
+    <div class="text-gray-400">{{race.Circuit.circuitName}}</div>
+    <div class="hover:underline cursor-pointer text-blue-500" (click)="fetchQualifying(race.round)">Qualifying
+    </div>
+  </div>
+
+  <div class="flex gap-2">
+    <div>Results:</div>
+    <div class="text-gray-400" *ngFor="let result of race.results | slice: 0: 5">
+      {{result.position}} {{result.Driver.familyName}} {{result.Driver.givenName}}
+    </div>
+  </div>
+
+  <div class="flex gap-2">
+    <div>
+      Finished: <b>{{race.statuses | status: 'Finished'}}</b>
+    </div>
+    <div>
+      Accident: <b>{{race.statuses | status: 'Accident'}}</b>
+    </div>
+    <div>
+      +1 Lap: <b>{{race.statuses | status: '+1 Lap'}}</b>
+    </div>
+  </div>
+
+</div>
+
+<app-paginator (updateMaxItems)="updateMaxItems($event)"
+               [hasPrev]="hasPrev$ | async"
+               [hasNext]="hasNext$ | async"
+               (prev)="prev()"
+               (next)="next()"
+               [selectedMaxItems]="selectedMaxItems$ | async"></app-paginator>

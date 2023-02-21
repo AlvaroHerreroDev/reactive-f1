@@ -1,0 +1,28 @@
+<!-- This is one way to subscribe in templates as a viewModel -->
+<!-- We could have exposed it in the component or store -->
+<ng-container *ngIf="{
+              loading: loading$ | async,
+              items: items$ | async,
+              hasPrev: hasPrev$ | async,
+              hasNext: hasNext$ | async,
+              selectedMaxItems: selectedMaxItems$ | async
+            } as vm">
+
+  <h4 class="my-3 ">
+    <span class="text-xl font-bold">Drivers</span>
+    <app-loader *ngIf="vm.loading"></app-loader>
+  </h4>
+
+  <div *ngFor="let driver of vm.items" class="flex gap-2" [class.disabled]="vm.loading">
+    <a target="_blank" [href]="driver.url">🏎️</a>
+    <div>{{driver.givenName}} {{driver.familyName}}</div>
+    <div class="text-gray-400">{{driver.dateOfBirth}}</div>
+  </div>
+
+  <app-paginator (updateMaxItems)="updateMaxItems($event)"
+                 [hasPrev]="vm.hasPrev"
+                 [hasNext]="vm.hasNext"
+                 (prev)="prev()"
+                 (next)="next()"
+                 [selectedMaxItems]="vm.selectedMaxItems"></app-paginator>
+</ng-container>

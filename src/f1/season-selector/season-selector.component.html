@@ -1,0 +1,5 @@
+<button (click)="updateSeason.next(season)"
+        *ngFor="let season of availableSeasons"
+        [ngClass]="{'bg-blue-300 white': selectedSeason === season}"
+        class="p-1 border-2"
+>{{season}}</button>

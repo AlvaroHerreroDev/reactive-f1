@@ -1,0 +1,10 @@
+<button class="border p-2" (click)="prev.emit()" [ngClass]="{'disabled': !hasPrev}">< Prev</button>
+<button class="border p-2" (click)="next.emit()" [ngClass]="{'disabled': !hasNext}">Next ></button>
+<div class="flex gap-1">
+  <button *ngFor="let option of options"
+          class="border p-1"
+          [ngClass]="{'bg-blue-200 white': selectedMaxItems === option}"
+          (click)="updateMaxItems.emit(option)"
+  >{{option}}
+  </button>
+</div>
